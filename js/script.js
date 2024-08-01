@@ -25,7 +25,7 @@ let remplazar =[
 const remplace = (nuevoValor) => {
     mensajeFinal.innerHTML = nuevoValor;
     munheco.classList.add("oculto");
-    ingresoTexto.value = "";
+    // ingresoTexto.value = "";
     rightInfo.style.display = "none";
     botonCopiar.style.display = "block"; 
     right.classList.add("ajustar");
@@ -33,55 +33,91 @@ const remplace = (nuevoValor) => {
 
 }
 
-const reset = () => {
-    mensajeFinal.innerHTML = "";
-    munheco.classList.remove("oculto");
-    rightInfo.style.display = "block";
-    botonCopiar.style.display = "none"; 
-    right.classList.remove("ajustar");
-    mensajeFinal.classList.remove("ajustar");
-    ingresoTexto.focus();
-}
+// const reset = () => {
+//     mensajeFinal.innerHTML = "";
+//     munheco.classList.remove("oculto");
+//     rightInfo.style.display = "block";
+//     botonCopiar.style.display = "none"; 
+//     right.classList.remove("ajustar");
+//     mensajeFinal.classList.remove("ajustar");
+//     ingresoTexto.focus();
+// }
 
-botonEncriptar.addEventListener("click", () =>{
-    const texto = ingresoTexto.value.toLowerCase();
-    if(texto != "") {
-        function encriptar(newTex) {
-            for(let i = 0; i < remplazar.length; i++) {
-                if (newTex.includes(remplazar[i][0])) {
-                    newTex = newTex.replaceAll(remplazar[i][0], remplazar[i][1]);
-                };          
-            };
-            return newTex
-        };    
-            
-    }else{
-        alert("Ingrese el texto que desea Encriptar.");
-        reset();
+
+botonEncriptar.addEventListener("click", () => {
+const texto = ingresoTexto.value;
+    let txt = texto.normalize("NFD").replace(/[$\.´´¿\?~!\A-Z¡@#%^&*()_|}\{[\]>\<:"`+;,\u0300-\u036f']/g, " ")
+
+
+    if(texto == ""){
+        swal({
+            title: "Oops!",
+            text: "No hay texto para encriptar.",
+            icon: "warning",
+            button: "Ok",
+        })
     }
-        
-    // const textoEncriptado = encriptar (texto);
-    remplace(encriptar(texto));   
+
+    else if (texto !== txt){
+        swal({
+        title: "ERROR",
+        text: "El texto no debe contener mayúsculas, acentos ni caracteres especiales",
+        icon: "error",
+        button: "Ok",
+      });
+       mensajeFinal= "";
+
+    }
+      
+    function encriptar(newText) {
+        for(let i = 0; i < remplazar.length; i++){
+            if (newText.includes(remplazar[i][0])) {
+                newText = newText.replaceAll(remplazar[i][0], remplazar[i][1]);
+                };          
+        };
+        return newText;
+    }
+    remplace (encriptar(texto)) 
+
+
 });
 
 botonDesencriptar.addEventListener("click", () => {
-    const texto = ingresoTexto.value.toLowerCase();
-    if(texto != ""){
-        function desencriptar(newTex){
-            for ( let i = 0; i < remplazar.length; i++) {
-                if (newTex.includes(remplazar[i][1])) {
-                    newTex = newTex.replaceAll(remplazar[i][1], remplazar[i][0]);
-                };
-            };
-            return newTex
-        };
-    }else{
-        alert("Ingrese el texto que desea Desencriptar.");
-        reset();
-    }   
+    const texto = ingresoTexto.value;
+    let txt = texto.normalize("NFD").replace(/[$\.´´¿\?~!\A-Z¡@#%^&*()_|}\{[\]>\<:"`+;,\u0300-\u036f']/g, " ")
 
-    // const textoDesencriptado = desencriptar(texto);
+
+    if(texto == ""){
+        swal({
+            title: "Oops!",
+            text: "No hay texto para desencriptar",
+            icon: "warning",
+            button: "Ok",
+        })
+    }
+
+    else if (texto !== txt){
+        swal({
+        title: "ERROR",
+        text: "El texto no debe contener mayúsculas, acentos ni caracteres especiales",
+        icon: "error",
+        button: "Ok",
+      });
+       mensajeFinal= "";
+
+    }  
+    
+    function desencriptar(newText){
+        for ( let i = 0; i < remplazar.length; i++) {
+            if (newText.includes(remplazar[i][1])) {
+                newText = newText.replaceAll(remplazar[i][1], remplazar[i][0]);
+            };
+        };
+        return newText;
+    };
+    
     remplace(desencriptar(texto));
+    
 });
 
 
@@ -91,5 +127,11 @@ botonCopiar.addEventListener("click", () =>{
    texto.select();
    document.execCommand("copy")
    alert("texto copiado");
-   reset();
+   mensajeFinal.innerHTML = "";
+   munheco.classList.remove("oculto");
+   rightInfo.style.display = "block";
+   botonCopiar.style.display = "none";
+   right.classList.remove("ajustar");
+   mensajeFinal.classList.remove("ajustar");
+   ingresoTexto.focus();
 })
