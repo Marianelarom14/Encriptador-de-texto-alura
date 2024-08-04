@@ -39,7 +39,7 @@ textarea{
 .portada__logo{
     color:#226d29;
     flex-wrap: nowrap;
-    font-size: 37px;
+    font-size: 32px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 /* main */
@@ -254,7 +254,7 @@ textarea{
     }   
     .mensaje__final{
         font-size: 18px;
-        min-height: 50%;
+        min-height: 60%;
         text-align: center;  
     }
     .right__info{

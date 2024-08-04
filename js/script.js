@@ -90,7 +90,7 @@ botonDesencriptar.addEventListener("click", () => {
     if(texto == ""){
         swal({
             title: "Oops!",
-            text: "No hay texto para desencriptar",
+            text: "No hay texto para desencriptar.",
             icon: "warning",
             button: "Ok",
         })
@@ -126,7 +126,11 @@ botonCopiar.addEventListener("click", () =>{
     // navigator.clipboard.writeText(texto.value);
    texto.select();
    document.execCommand("copy")
-   alert("texto copiado");
+   swal({
+    title: "Texto copiado",
+    icon: "success",
+    button: "Ok!",
+  })
    mensajeFinal.innerHTML = "";
    munheco.classList.remove("oculto");
    rightInfo.style.display = "block";
