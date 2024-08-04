@@ -148,14 +148,13 @@ textarea{
     font-weight: bold;
     font-size: 24px;
     padding: 10px 10px 10px 10px;
-    display: flex;
 }
 .mensaje__final.ajustar{
     color: var(--color-gris);
     height: auto;
 	min-height: calc(90% - 67px - 32px);
 	pointer-events: all;
-	text-align: left;
+	text-align: center;
 	overflow: auto;
 }
 .mensaje__final::placeholder{
@@ -213,18 +212,26 @@ textarea{
     }
     .right{
         width: 100%;
-        height: 90%;
+        height: 100%;
+        text-align: center;
     }
-    .mensaje__final.ajustar{
-        height: 90%;
-        display: flex;
+    .right__info{
+        font-size: 16px;
+        
+    }
+    .mensaje__final{
+        height: 100%;
+        width: 100%;
+        display: table-cell;
+        align-items: center;
         font-size: 18px;
-        text-align: left;
-        justify-content: flex-start;
+        text-align: center;
+        justify-content: center;
     }
     .munheco{
         display: none;
     }
+
 } 
 
 @media screen and (max-width:500px) {
@@ -240,13 +247,20 @@ textarea{
     .right.ajustar{
         width: 100%;
         min-height: 80%;
+        justify-content: center;
+        gap: 10px;
     }
     
     .mensaje__final{
-        font-size: 16px;
+        font-size: 18px;
         min-height: 50%;
-        text-align: center;
-        display: flex;
+        text-align: center;  
+        display: center;
     }
-    
+    .right__info{
+        font-size: 16px;
+    }
+    .creador{
+        font-size: 14px;
+    }
 }
